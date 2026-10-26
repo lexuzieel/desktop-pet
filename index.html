@@ -1,0 +1,197 @@
+<!doctype html><meta charset="utf-8">
+<style>
+  html,body{margin:0;background:transparent;overflow:hidden;user-select:none}
+  .l{position:absolute;left:0;top:0;width:340px;height:480px;pointer-events:none}
+  #wrap{position:absolute;left:71px;top:70px;width:197px;height:262px;overflow:hidden;pointer-events:none;
+        transform-origin:98px 262px;filter:contrast(1.05) saturate(.95) brightness(.97)}
+  video{position:absolute;left:-48px;top:0;width:245px;height:285px}
+  #drag{position:absolute;inset:0;cursor:grab}
+</style>
+<svg class="l" viewBox="0 0 340 480">
+  <defs>
+    <radialGradient id="bg" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#1b2227" stop-opacity=".97"/><stop offset="1" stop-color="#05080a" stop-opacity=".98"/></radialGradient>
+  </defs>
+  <ellipse cx="170" cy="468" rx="165" ry="9" fill="#000" fill-opacity=".35"/>
+  <path d="M30 44 V402 A140 13 0 0 0 310 402 V44 A140 16 0 0 0 30 44Z" fill="url(#bg)"/>
+  <rect x="122" y="340" width="96" height="62" fill="#1b1b1e"/>
+</svg>
+<div id="wrap">
+  <video id="idle" src="assets/idle.webm" muted loop autoplay playsinline></video>
+  <video id="react" src="assets/react.webm" muted playsinline style="visibility:hidden"></video>
+</div>
+<canvas id="fx" class="l"></canvas>
+<svg class="l" viewBox="0 0 340 480">
+  <defs>
+    <linearGradient id="col" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2b2b2d"/><stop offset=".45" stop-color="#0d0d0e"/><stop offset="1" stop-color="#050505"/></linearGradient>
+    <linearGradient id="colh" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".7"/><stop offset=".3" stop-color="#fff" stop-opacity=".07"/><stop offset=".7" stop-color="#fff" stop-opacity=".04"/><stop offset="1" stop-color="#000" stop-opacity=".7"/></linearGradient>
+    <radialGradient id="stud" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#9a9a9a"/><stop offset="1" stop-color="#262626"/></radialGradient>
+    <linearGradient id="ped" x1="0" x2="1"><stop offset="0" stop-color="#050505"/><stop offset=".3" stop-color="#2c2c30"/><stop offset=".6" stop-color="#18181a"/><stop offset="1" stop-color="#030303"/></linearGradient>
+    <linearGradient id="chin" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="wood" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#a8482a"/><stop offset=".35" stop-color="#7b2c15"/><stop offset="1" stop-color="#3d1207"/></linearGradient>
+    <linearGradient id="woodh" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".45"/><stop offset=".25" stop-color="#fff" stop-opacity=".12"/><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></linearGradient>
+    <radialGradient id="top" cx=".4" cy=".4" r=".8"><stop offset="0" stop-color="#c25a35"/><stop offset="1" stop-color="#7a2a14"/></radialGradient>
+    <linearGradient id="brass" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fbe19a"/><stop offset=".45" stop-color="#cc8a2c"/><stop offset="1" stop-color="#7d4a12"/></linearGradient>
+    <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".30"/><stop offset=".08" stop-color="#fff" stop-opacity=".04"/><stop offset=".9" stop-color="#fff" stop-opacity=".04"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></linearGradient>
+  </defs>
+  <rect x="98" y="318" width="144" height="26" fill="url(#chin)"/>
+  <path d="M122 345 H218 V402 A48 6 0 0 1 122 402Z" fill="url(#ped)"/>
+  <path d="M104 322 Q172 338 240 322 L242 340 Q172 360 102 340Z" fill="url(#col)"/>
+  <path d="M104 322 Q172 338 240 322 L242 340 Q172 360 102 340Z" fill="url(#colh)"/>
+  <path d="M104 322 Q172 338 240 322" fill="none" stroke="#555" stroke-opacity=".6" stroke-width="1.2"/>
+  <path d="M103 331 Q172 349 241 331" fill="none" stroke="#000" stroke-opacity=".6" stroke-dasharray="3 3"/>
+  <g fill="url(#stud)"><circle cx="118" cy="334" r="4.2"/><circle cx="134" cy="340" r="4.2"/><circle cx="152" cy="344" r="4.2"/><circle cx="172" cy="345" r="4.2"/><circle cx="192" cy="344" r="4.2"/><circle cx="210" cy="340" r="4.2"/><circle cx="226" cy="334" r="4.2"/></g>
+  <path d="M12 406 V452 Q12 470 40 470 H300 Q328 470 328 452 V406Z" fill="url(#wood)"/>
+  <path d="M12 406 V452 Q12 470 40 470 H300 Q328 470 328 452 V406Z" fill="url(#woodh)"/>
+  <path d="M30 430 Q170 424 310 432 M24 446 Q170 440 316 448" stroke="#2a0b04" stroke-opacity=".25" fill="none"/>
+  <ellipse cx="170" cy="406" rx="158" ry="14" fill="url(#top)" stroke="#d98c62" stroke-opacity=".6"/>
+  <ellipse cx="170" cy="403" rx="140" ry="12" fill="none" stroke="#1a0702" stroke-opacity=".5" stroke-width="1.5"/>
+  <ellipse cx="170" cy="402" rx="48" ry="6" fill="#000" fill-opacity=".45"/>
+  <rect x="82" y="424" width="176" height="30" rx="15" fill="url(#brass)" stroke="#5e3508" stroke-width="1.5"/>
+  <rect x="86" y="427" width="168" height="8" rx="4" fill="#fff" fill-opacity=".35"/>
+  <text x="170" y="446" text-anchor="middle" font-family="Georgia,serif" font-size="18" fill="#7a3a10" fill-opacity=".9">Eric</text>
+  <path d="M30 44 V402 A140 13 0 0 0 310 402 V44 A140 16 0 0 1 30 44Z" fill="url(#glass)"/>
+  <path d="M30 44 V402 M310 44 V402" stroke="#eaf6ff" stroke-opacity=".75" stroke-width="2"/>
+  <path d="M30 402 A140 13 0 0 0 310 402" fill="none" stroke="#eaf6ff" stroke-opacity=".7" stroke-width="2"/>
+  <ellipse cx="170" cy="44" rx="140" ry="16" fill="none" stroke="#eaf6ff" stroke-opacity=".85" stroke-width="2"/>
+  <path d="M58 56 L88 56 L100 392 L74 392Z" fill="#fff" fill-opacity=".20"/>
+  <path d="M104 58 L112 58 L118 390 L110 390Z" fill="#fff" fill-opacity=".10"/>
+  <path d="M258 66 H272 V388 H258Z" fill="#fff" fill-opacity=".13"/>
+  <path d="M44 100 V350" stroke="#fff" stroke-opacity=".3" stroke-width="4" stroke-linecap="round"/>
+</svg>
+<div id="drag"></div>
+<script>
+const idle=document.getElementById('idle'), react=document.getElementById('react'), wrap=document.getElementById('wrap');
+let reacting=false, timer;
+function schedule(){ clearTimeout(timer); timer=setTimeout(playReact, 8000+Math.random()*15000); }
+function playReact(){
+  if(reacting) return; reacting=true;
+  react.currentTime=0; react.play();
+  react.style.visibility='visible'; idle.style.visibility='hidden';
+}
+react.addEventListener('ended',()=>{
+  reacting=false; idle.currentTime=0; idle.play();
+  idle.style.visibility='visible'; react.style.visibility='hidden'; schedule();
+});
+
+// ---------- drag (also feeds the physics with window position) ----------
+const d=document.getElementById('drag'); let start=null, moved=false;
+let winPos=null; // latest window position while dragging
+d.addEventListener('mousedown',async e=>{
+  if(e.button!==0) return;
+  const p=await window.pet.pos(); start={c:p.cursor,w:p.win}; moved=false; d.style.cursor='grabbing';
+  winPos={x:p.win[0],y:p.win[1]};
+});
+window.addEventListener('mousemove',async e=>{
+  if(!start||!(e.buttons&1)) return;
+  const p=await window.pet.pos(); const dx=p.cursor.x-start.c.x, dy=p.cursor.y-start.c.y;
+  if(Math.abs(dx)+Math.abs(dy)>3) moved=true;
+  winPos={x:start.w[0]+dx,y:start.w[1]+dy};
+  window.pet.move(winPos.x,winPos.y);
+});
+window.addEventListener('mouseup',()=>{ if(start&&!moved) playReact(); start=null; d.style.cursor='grab'; });
+d.addEventListener('contextmenu',e=>{e.preventDefault(); window.pet.quit();});
+schedule();
+
+// ---------- fluid + bubbles + head physics ----------
+const cv=document.getElementById('fx'), ctx=cv.getContext('2d');
+const dpr=window.devicePixelRatio||1; cv.width=340*dpr; cv.height=480*dpr; ctx.scale(dpr,dpr);
+const L=30, R=310, BOT=402, Y0=64, N=48, DX=(R-L)/(N-1);
+const h=new Float32Array(N), hv=new Float32Array(N);
+let wx=0, wy=0;                       // bulk water velocity relative to jar
+let phi=0, phiV=0, sx=0, sxV=0, sy=0, syV=0; // head: tilt, sway, bob
+let prevPos=null, prevVel={x:0,y:0}, ax=0, ay=0, lastT=performance.now();
+const bubbles=[];
+function spawn(x,y,r){ bubbles.push({x,y,r,vx:0,vy:0,ph:Math.random()*6.28,pop:0}); }
+function surfaceAt(x){ const f=(x-L)/DX, i=Math.max(0,Math.min(N-2,Math.floor(f))), t=f-i; return Y0-(h[i]*(1-t)+h[i+1]*t); }
+function step(dt){
+  // jar acceleration from dragged window position
+  if(winPos){
+    if(prevPos){
+      const vx=(winPos.x-prevPos.x)/dt, vy=(winPos.y-prevPos.y)/dt;
+      const rax=(vx-prevVel.x)/dt, ray=(vy-prevVel.y)/dt;
+      ax+=(rax-ax)*0.5; ay+=(ray-ay)*0.5; prevVel={x:vx,y:vy};
+    }
+    prevPos={x:winPos.x,y:winPos.y};
+    if(!start) winPos=null;
+  } else if(prevPos){
+    // released: window stops dead -> big deceleration pulse, then rest
+    const rax=(0-prevVel.x)/dt, ray=(0-prevVel.y)/dt;
+    ax=rax; ay=ray; prevVel={x:0,y:0}; prevPos=null;
+  } else { ax*=0.5; ay*=0.5; }
+  const nax=Math.max(-4,Math.min(4,ax/2500)), nay=Math.max(-4,Math.min(4,ay/2500));
+  const energy=Math.hypot(nax,nay);
+
+  // wave field
+  for(let i=0;i<N;i++){
+    const l=h[i>0?i-1:1], r=h[i<N-1?i+1:N-2];
+    let acc=(l+r-2*h[i])*0.35 - h[i]*0.012;
+    acc+= -nax*3.2*((i-(N-1)/2)/((N-1)/2)) + nay*2.4;
+    hv[i]=(hv[i]+acc)*0.985;
+  }
+  for(let i=0;i<N;i++){ h[i]+=hv[i]; if(h[i]>18)h[i]=18; if(h[i]<-14)h[i]=-14; }
+
+  // bulk water current
+  wx=(wx - nax*1.6)*0.975; wy=(wy + nay*1.2)*0.975;
+
+  // head on its neck: damped springs driven by the water current
+  phiV+=(-phi*0.045 - phiV*0.06) + (-nax*0.55 + wx*0.04);
+  phi+=phiV;
+  sxV+=(-sx*0.05 - sxV*0.08) + (-nax*0.35);
+  sx+=sxV;
+  syV+=(-sy*0.06 - syV*0.09) + (nay*0.35);
+  sy+=syV;
+  phi=Math.max(-7,Math.min(7,phi)); sx=Math.max(-6,Math.min(6,sx)); sy=Math.max(-5,Math.min(5,sy));
+  wrap.style.transform=`translate(${sx.toFixed(2)}px,${sy.toFixed(2)}px) rotate(${phi.toFixed(2)}deg)`;
+
+  // bubbles: gentle stream + bursts when shaken
+  if(Math.random()<0.03) spawn(L+20+Math.random()*(R-L-40), BOT-4, 1.2+Math.random()*2.2);
+  const burst=Math.min(10,energy*4);
+  for(let k=0;k<burst;k++) if(Math.random()<0.7)
+    spawn(L+10+Math.random()*(R-L-20), Y0+30+Math.random()*(BOT-Y0-50), 1+Math.random()*4.5);
+  for(let i=bubbles.length-1;i>=0;i--){
+    const b=bubbles[i];
+    if(b.pop){ b.pop++; if(b.pop>8) bubbles.splice(i,1); continue; }
+    const rise=0.012+b.r*0.012;
+    b.vx+=(wx*0.5-b.vx)*0.05 + nax*0.08 + Math.sin(b.ph+=0.08)*0.015 + (Math.random()-0.5)*energy*0.1;
+    b.vy+=(wy*0.5-b.vy)*0.05 - rise + (Math.random()-0.5)*energy*0.1;
+    b.x+=b.vx; b.y+=b.vy;
+    if(b.x<L+b.r){b.x=L+b.r;b.vx*=-0.4;} if(b.x>R-b.r){b.x=R-b.r;b.vx*=-0.4;}
+    if(b.y>BOT-b.r){b.y=BOT-b.r;b.vy=-Math.abs(b.vy)*0.3;}
+    if(b.y<surfaceAt(b.x)+b.r*0.5) b.pop=1;
+  }
+  if(bubbles.length>260) bubbles.splice(0,bubbles.length-260);
+}
+function draw(){
+  ctx.clearRect(0,0,340,480);
+  ctx.save();
+  ctx.beginPath(); ctx.moveTo(L,44); ctx.lineTo(L,BOT); ctx.ellipse(170,BOT,140,13,0,Math.PI,0,true); ctx.lineTo(R,44); ctx.closePath(); ctx.clip();
+  // water body
+  ctx.beginPath(); ctx.moveTo(L,BOT+15);
+  for(let i=0;i<N;i++) ctx.lineTo(L+i*DX, Y0-h[i]);
+  ctx.lineTo(R,BOT+15); ctx.closePath();
+  const g=ctx.createLinearGradient(0,Y0,0,BOT);
+  g.addColorStop(0,'rgba(150,215,205,0.20)'); g.addColorStop(1,'rgba(40,95,100,0.34)');
+  ctx.fillStyle=g; ctx.fill();
+  // bubbles
+  for(const b of bubbles){
+    if(b.pop){ ctx.strokeStyle=`rgba(255,255,255,${0.5-b.pop*0.06})`; ctx.lineWidth=1; ctx.beginPath(); ctx.arc(b.x,b.y,b.r+b.pop*1.2,0,6.283); ctx.stroke(); continue; }
+    const rg=ctx.createRadialGradient(b.x-b.r*.3,b.y-b.r*.3,b.r*.1,b.x,b.y,b.r);
+    rg.addColorStop(0,'rgba(255,255,255,0.35)'); rg.addColorStop(.7,'rgba(200,235,240,0.08)'); rg.addColorStop(1,'rgba(255,255,255,0.45)');
+    ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,6.283); ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.55)'; ctx.lineWidth=0.8; ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.beginPath(); ctx.arc(b.x-b.r*.35,b.y-b.r*.35,Math.max(.6,b.r*.22),0,6.283); ctx.fill();
+  }
+  // surface: lit band + highlight line
+  ctx.beginPath(); for(let i=0;i<N;i++){const x=L+i*DX,y=Y0-h[i]; i?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+  for(let i=N-1;i>=0;i--) ctx.lineTo(L+i*DX, Y0-h[i]+9+ (h[i]-(h[i>0?i-1:0]))*2);
+  ctx.closePath(); ctx.fillStyle='rgba(220,250,245,0.14)'; ctx.fill();
+  ctx.beginPath(); for(let i=0;i<N;i++){const x=L+i*DX,y=Y0-h[i]; i?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+  ctx.strokeStyle='rgba(255,255,255,0.7)'; ctx.lineWidth=1.6; ctx.stroke();
+  ctx.restore();
+}
+function loop(now){
+  const dt=Math.max(0.004,Math.min(0.05,(now-lastT)/1000)); lastT=now;
+  step(dt); draw(); requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+</script>
