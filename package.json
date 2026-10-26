@@ -3,9 +3,33 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder --win portable"
   },
   "devDependencies": {
-    "electron": "^45.0.0"
+    "electron": "^45.0.0",
+    "electron-builder": "^26.18.0"
+  },
+  "description": "Desktop pet: a head in a jar",
+  "author": "lexuzieel",
+  "build": {
+    "appId": "com.lexuzieel.desktoppet",
+    "productName": "DesktopPet",
+    "win": {
+      "target": "portable",
+      "signAndEditExecutable": false
+    },
+    "portable": {
+      "artifactName": "DesktopPet-${version}.exe"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "assets/**"
+    ],
+    "directories": {
+      "output": "dist"
+    }
   }
 }
