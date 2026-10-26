@@ -26,10 +26,14 @@
       "main.js",
       "preload.js",
       "index.html",
+      "fluid.js","scene.js","vendor/**",
       "assets/**"
     ],
     "directories": {
       "output": "dist"
     }
+  },
+  "dependencies": {
+    "three": "^0.186.1"
   }
 }
